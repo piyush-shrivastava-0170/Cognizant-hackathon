@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Registration System</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Hackathon Registration System</h1>
+        
+        <div class="form-section">
+            <h2>Register a New Project</h2>
+            <form id="registrationForm">
+                <label for="projectTitle">Project Title:</label>
+                <input type="text" id="projectTitle" required>
+                
+                <label for="projectDescription">Project Description:</label>
+                <textarea id="projectDescription" required></textarea>
+                
+                <label for="teamMembers">Team Members (Max 4):</label>
+                <input type="text" id="teamMember1" placeholder="Member 1">
+                <input type="text" id="teamMember2" placeholder="Member 2">
+                <input type="text" id="teamMember3" placeholder="Member 3">
+                <input type="text" id="teamMember4" placeholder="Member 4">
+                
+                <label for="theme">Theme:</label>
+                <select id="theme">
+                    <option value="Gama">Game</option>
+                    <option value="Information System">Information System</option>
+                    <option value="Smart Assistant">Smart Assistant</option>
+                    <option value="Virtual Reality">Virtual Reality</option>
+                </select>
+                
+                <button type="submit">Register Project</button>
+            </form>
+        </div>
+
+
+    <!-- <script src="script.js"></script> -->
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+           
+            // Collect form values
+            const projectTitle = document.getElementById('projectTitle').value;
+            const projectDescription = document.getElementById('projectDescription').value;
+           
+            // Collect team members
+            const team = [];
+            for (let i = 1; i <= 4; i++) {
+                const member = document.getElementById(`teamMember${i}`).value;
+                if (member) team.push(member);
+            }
+    
+            // Get the theme
+            const theme = document.getElementById('theme').value;
+    
+            // Prepare the hackathon data
+            const hackathonData = {
+                projectTitle,
+                projectDescription,
+                team,
+                theme
+            };
+    
+            // Save data to local storage
+            const hacks = JSON.parse(localStorage.getItem('hacks')) || [];
+            hacks.push(hackathonData);
+            localStorage.setItem('hacks', JSON.stringify(hacks));
+    
+            // Show success message
+            alert('Project registered successfully!');
+           
+            // Reset the form
+            this.reset();
+        });
+    </script>
+</body>
+</html>
